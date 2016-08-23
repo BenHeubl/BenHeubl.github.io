@@ -1,13 +1,11 @@
 ---
-layout: post
-title: How Hillary Clinton speaks and why style matters
-excerpt: Text as the next big data source for data journalists
-modified: 2016-08-22T00:00:00.000Z
+title: Fashion models
+header:
+  teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
+categories:
+  - Jekyll
 tags:
-  - intro
-comments: true
-image:
-  feature: /strategy-to-speak/header2.png
+  - update
 ---
 
 **Text analysis in R reveals how Hillary Clinton structured her conventional speeches, how Clinton's remarks at the US State department from 2009 to 2013 reveals important hints on how she could govern the country if she is being elected into the White House, and what Clinton's tweets reveals about her campaign strategy**.

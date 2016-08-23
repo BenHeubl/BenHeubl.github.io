@@ -1,13 +1,11 @@
 ---
-layout: post
-title: A tale of missing women in Mexico
-excerpt: Women missing become younger
-modified: 2016-08-22T00:00:00.000Z
+title: Fashion models
+header:
+  teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
+categories:
+  - Jekyll
 tags:
-  - intro
-comments: true
-image:
-  feature: /mexico/header.jpg
+  - update
 ---
 
 **Missing women in Mexico are becoming younger. This is a result of an analysis of data handed over to me by Mexican Data journalist Daniela Guazo. According to Guazo, the data was scraped by a team of journalists from a Mexican government database which contained records of missing women reported by their families for both the State of Mexico and Mexico City.**

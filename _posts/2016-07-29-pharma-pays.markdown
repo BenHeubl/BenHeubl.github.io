@@ -1,13 +1,11 @@
 ---
-layout: post
-title: The naughty business of the european pharma industry
-excerpt: Payments by pharmaceutical companies to doctors
-modified: 2016-08-22T00:00:00.000Z
+title: Fashion models
+header:
+  teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
+categories:
+  - Jekyll
 tags:
-  - intro
-comments: true
-image:
-  feature: /pharma/header.jpg
+  - update
 ---
 
 Data by the Association of the British Pharmaceutical Industry reveals that: <http://www.abpi.org.uk/our-work/disclosure/Pages/DocumentLibrary.aspx?Paged=TRUE&p_SortBehavior=0&p_FileLeafRef=Sobi_MethodologicalNotes_2015%2epdf&p_ID=209&PageFirstRow=101&&View={67D056CF-A553-4724-A9E6-230AE9681875}#>

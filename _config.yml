@@ -79,8 +79,8 @@ analytics:
 author:
   name             : "Ben Heubl"
   avatar           : "bio-photo.jpg"
-  bio              : "I am an amazing person."
-  location         : "Somewhere"
+  bio              : "I am a data journalist interested in data science."
+  location         : "London, UK"
   email            :
   uri              :
   bitbucket        :
@@ -226,3 +226,63 @@ compress_html:
   clippings: all
   ignore:
     envs: development
+
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      sidebar:
+        nav: "docs"
+  # _recipes
+  - scope:
+      path: ""
+      type: recipes
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _pets
+  - scope:
+      path: ""
+      type: pets
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comment: true
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true

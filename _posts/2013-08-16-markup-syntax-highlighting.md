@@ -1,18 +1,16 @@
 ---
-title: "Markup: Syntax Highlighting"
-excerpt: "Post displaying the various ways of highlighting code in Markdown."
+title: Fashion models
 header:
-  teaser: "markup-syntax-highlighting-teaser.jpg"
-tags: 
-  - code
-  - syntax highlighting
+  teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
+categories:
+  - Jekyll
+tags:
+  - update
 ---
 
 Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.[^1]
 
-[^1]: <http://en.wikipedia.org/wiki/Syntax_highlighting>
-
-### GFM Code Blocks
+# GFM Code Blocks
 
 GitHub Flavored Markdown [fenced code blocks](https://help.github.com/articles/creating-and-highlighting-code-blocks/) are supported. To modify styling and highlight colors edit `/_sass/syntax.scss`.
 
@@ -47,7 +45,7 @@ module Jekyll
       self.read_yaml(File.join(base, '_layouts'), 'tag_index.html')
       self.data['tag'] = tag
       tag_title_prefix = site.config['tag_title_prefix'] || 'Tagged: '
-      tag_title_suffix = site.config['tag_title_suffix'] || '&#8211;'
+      tag_title_suffix = site.config['tag_title_suffix'] || '–'
       self.data['title'] = "#{tag_title_prefix}#{tag}"
       self.data['description'] = "An archive of posts tagged #{tag}."
     end
@@ -55,25 +53,27 @@ module Jekyll
 end
 ```
 
-### Code Blocks in Lists
+# Code Blocks in Lists
 
 Indentation matters. Be sure the indent of the code block aligns with the first non-space character after the list item marker (e.g., `1.`). Usually this will mean indenting 3 spaces instead of 4.
 
 1. Do step 1.
 2. Now do this:
-   
-   ```ruby
-   def print_hi(name)
-     puts "Hi, #{name}"
-   end
-   print_hi('Tom')
-   #=> prints 'Hi, Tom' to STDOUT.
-   ```
-        
+
+  ```ruby
+  def print_hi(name)
+  puts "Hi, #{name}"
+  end
+  print_hi('Tom')
+  #=> prints 'Hi, Tom' to STDOUT.
+  ```
+
 3. Now you can do this.
 
-### GitHub Gist Embed
+# GitHub Gist Embed
 
 An example of a Gist embed below.
 
 {% gist mmistakes/6589546 %}
+
+[^1]: http://en.wikipedia.org/wiki/Syntax_highlighting
