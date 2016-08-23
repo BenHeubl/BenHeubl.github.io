@@ -79,8 +79,8 @@ analytics:
 author:
   name             : "Ben Heubl"
   avatar           : "bio-photo.jpg"
-  bio              : "I am a data journalist interested in data science."
-  location         : "London, UK"
+  bio              : "I am a data journalist"
+  location         : "London"
   email            :
   uri              :
   bitbucket        :
