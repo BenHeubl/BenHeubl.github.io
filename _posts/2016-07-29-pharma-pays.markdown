@@ -1,5 +1,5 @@
 ---
-title: Secrets by the doctor
+title: Pharma pays Doc -> Doc is happy -> Doc prescribes more
 header:
   teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
 categories:
@@ -8,17 +8,15 @@ tags:
   - update
 ---
 
+**We know that pharmaceutical companies find ways to give money to doctors, hoping to increase their sales. Now, the sector wants to change and publishes data on thesse payments. An analyis on pharmaceutical payments, and an application of machine learning in the context of data journalism.**
+
 ![alt text](/images/pharma/header.jpg)
-
-# How big pharma buys the trust of healthcare
-
-**edit later**
 
 As accessing payment data from pharmaceutical companies to doctors and healthcare professionals becomes easier due to [a general agreement by the lobby to become more transparent](https://www.ft.com/content/b3e42806-3ec7-11e6-8716-a4a71e8140b0), more people will analyse to find possibly filthy methods by big pharma to drive drug sales.
 
 Admittingly, I got my hands on really awesome data. One is a dataset of pharmaceutical companies to German doctors and healthcare origanistons shared by Correctiv.org, an investigative newsroom. The second includes payments to doctors in the UK, and is freely accessible via [a searchable database](http://www.abpi.org.uk/our-work/disclosure/Pages/DocumentLibrary.aspx). Both datasets aloowed me to prefrom a basic explorative data analysis, and train several machine learning models to aid in predictions and classifications.
 
-## The devil is in small payements:
+# The devil is in small payements:
 
 The graphic tells an industry typcial story: Pharma generally pays small amounts (however large in number) in form of travel/accomdation, fees and sponsorships payment, while committing the payments under the umbrella of donations and grants.
 
@@ -44,7 +42,7 @@ Here is another view on the data. Circle size measures the average payement for 
 
 We get an expected picture when we plot the sum for each location. Cities such as Berlin and Munich are considerable larger. Despite of having expected that, we see outliers. Heidelberg only has 150,335 inhabitants, yet its circle sticks out. The same is true for a few other places.
 
-### NEXT
+## NEXT
 
 Data by the Association of the British Pharmaceutical Industry reveals that: <http://www.abpi.org.uk/our-work/disclosure/Pages/DocumentLibrary.aspx?Paged=TRUE&p_SortBehavior=0&p_FileLeafRef=Sobi_MethodologicalNotes_2015%2epdf&p_ID=209&PageFirstRow=101&&View={67D056CF-A553-4724-A9E6-230AE9681875}#>
 

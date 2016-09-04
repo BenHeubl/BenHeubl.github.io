@@ -10,8 +10,8 @@
   - title: "Categories"
     url: /categories/
 
-  - title: "Data"
-    url: /data/
+  # - title: "Data"
+  #   url: /data/
 
   #
   # - title: "Collections"

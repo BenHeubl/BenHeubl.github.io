@@ -1,5 +1,5 @@
 ---
-title: Guns in movies
+title: This is why guns are an inherent part of the movie industry
 header:
   teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
 categories:
@@ -8,11 +8,9 @@ tags:
   - update
 ---
 
-![alt text](/images/guns/header.png)
-
-# Why directors use guns in movies
-
 **Guns are as much part of the american film indsutry, as cool cars or good looking people. But a closer look at scraped date reveals important insights on the close relationship between a gun manufactioring indstry and their lobby, their company brandings and the collabroation with the film indsutry.**
+
+![alt text](/images/guns/header.png)
 
 Coming across this Internet Movie Firearms Database, I was eager to explore the data. To fetch data for a basic overview of actors and gun appearances, I wrote the following script in R:
 
@@ -218,4 +216,14 @@ While Disney seems to have increasingly featuring a larger variety of gun types 
 
 While it is interesting to look at this data on its own, it is worthwhile to consider what the movies industry really cares about. One important measure are ratings. IMDB is one of the first sources i checked out. I scraped the data fro action movies back to 2011\. Here how movie ratings (not) correlate with the number of gun types appearing in each movie:
 
-[^1]: http://en.wikipedia.org/wiki/Syntax_highlighting
+# ...?
+
+... ![pic1]({{ site.url }}/images/guns/plots/studio_analysis.svg)
+
+# ...?
+
+... ![pic1]({{ site.url }}/images/guns/plots/movies_years_gun_appearances.svg)
+
+# ...?
+
+... ![pic1]({{ site.url }}/images/guns/plots/producers_years_gun_appearances_frequent.svg)

@@ -10,7 +10,11 @@ tags:
 
 **Text analysis in R reveals how Hillary Clinton structured her conventional speeches, how Clinton's remarks at the US State department from 2009 to 2013 reveals important hints on how she could govern the country if she is being elected into the White House, and what Clinton's tweets reveals about her campaign strategy**.
 
+![alt text](/images/strategy-to-speak/header2.png)
+
 Great, so the convention is over. Clinton will go against Trump in the election finals. Now what? After Trump's and Clinton's speeches at the conventions, people are left with impressions. Listeners to conventional speeches noted how negative Trump's speech was. Clinton was generally said to be balanced, except at times when she discussed how truly unfit her opponent is for presidency.
+
+![alt text](/images/strategy-to-speak/header2.gif)
 
 To understand Hillary's sentiment in her speeches, we use [Julia Silge's and David Robinson's tidytext](https://www.r-bloggers.com/the-life-changing-magic-of-tidying-text/). First we load in the tidytext package, dplyr and stringr for some basic data wrangling. For the analysis of conventional speeches by democrate candidates, we set a linenumber bring the data into the format we need it in.
 

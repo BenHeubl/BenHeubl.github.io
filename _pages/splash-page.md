@@ -6,8 +6,8 @@ date: 2016-08-23T15:48:41.000Z
 header:
   overlay_color: black
   overlay_filter: '0'
-  overlay_image: about.png
-  cta_label: Data repo
+  overlay_image: about2.png
+  cta_label: Repo
   cta_url: 'https://github.com/benheubl/'
   caption: 'Photo credit: [**Allie Moh**](http://alliemoh.com/index.html)'
 excerpt: >-
@@ -88,3 +88,5 @@ For the analysis, scraping and machine learning part of my night job as data cru
 - [Olympic events past, present and pretend](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-15)
 - [The evolution of Islamic State](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-10)
 - [Where does foreign aid go?](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-8)
+
+Last year I build [DataCandy.co.uk](http://datacandy.co.uk/) and an [interactive design portfolio](http://datacandy.co.uk/design_portfolio/main/index.html).

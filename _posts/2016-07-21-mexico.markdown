@@ -1,5 +1,5 @@
 ---
-title: Missing women in Mexico are becoming younger!
+title: Missing women in Mexico are becoming younger
 header:
   teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
 categories:
@@ -8,9 +8,9 @@ tags:
   - update
 ---
 
-![alt text](/images/mexico/header.jpg)
-
 **Missing women in Mexico are becoming younger. This is a result of an analysis of data handed over to me by Mexican Data journalist Daniela Guazo. According to Guazo, the data was scraped by a team of journalists from a Mexican government database which contained records of missing women reported by their families for both the State of Mexico and Mexico City.**
+
+![alt text](/images/mexico/header.jpg)
 
 The data includes the missing cases that were reported only by their families on a Government website, and therefore belong to the category "self-reported", and should be taken with a grain of salt. But this may turn out to be an advantage in investigating the issues of an increasingly number of missing women in these states, as the government makes an important difference between how to title missing people.
 
