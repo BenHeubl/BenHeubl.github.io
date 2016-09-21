@@ -8,15 +8,95 @@ tags:
   - update
 ---
 
-**Text analysis in R reveals how Hillary Clinton structured her conventional speeches, how Clinton's remarks at the US State department from 2009 to 2013 reveals important hints on how she could govern the country if she is being elected into the White House, and what Clinton's tweets reveals about her campaign strategy**.
+**Text analysis in R on speeches is one way to find some new untold stories in the presidential election discussion. In this post we will concentrate on Hillary Clinton and her strategy to speak**
 
 ![alt text](/images/strategy-to-speak/header2.png)
 
-Great, so the convention is over. Clinton will go against Trump in the election finals. Now what? After Trump's and Clinton's speeches at the conventions, people are left with impressions. Listeners to conventional speeches noted how negative Trump's speech was. Clinton was generally said to be balanced, except at times when she discussed how truly unfit her opponent is for presidency.
+# "I'm in, and I'm in to win: 2008 vs. 2016
 
-![alt text](/images/strategy-to-speak/header2.gif)
+To compare Clinton's potential candidacy in 2008 with her current one, we scrape speech data from both campaigns. Her 2016 speeches are available on Hillary's campaign website, while speeches delivered 2007 and 2008 are to be found [here](http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000).
 
-To understand Hillary's sentiment in her speeches, we use [Julia Silge's and David Robinson's tidytext](https://www.r-bloggers.com/the-life-changing-magic-of-tidying-text/). First we load in the tidytext package, dplyr and stringr for some basic data wrangling. For the analysis of conventional speeches by democrate candidates, we set a linenumber bring the data into the format we need it in.
+![alt text](/images/strategy-to-speak/plots/2008_speech_lines.jpg) To end up with a relative reliable sentiment line, we will use the [tidytext package](https://cran.r-project.org/web/packages/tidytext/index.html), by David Robinson and Julia Silge. Both made a great effort to explain examples on their blogs ([Julia Silge](http://juliasilge.com/blog/), [David Robinson](http://varianceexplained.org/)).
+
+```r
+library(tidytext)
+library(tidyr)
+library(ggplot2)
+library(viridis)
+library(grid)
+library(directlabels)
+
+nullacht_speeches <- pr_2008_clean %>%
+  mutate(linenumber = row_number()) %>%
+  mutate(text = as.character(text))
+
+tidy_nullacht_speeches <- nullacht_speeches %>%
+  unnest_tokens(sentences, text, token = "sentences") %>%
+  mutate(speech_08 = row_number())
+
+tidy_nullacht_speeches <- tidy_nullacht_speeches %>%
+  unnest_tokens(word, sentences) %>%
+  group_by(speech_08) %>%
+  mutate(linenumber_word = row_number()) %>%
+  mutate(numberWords = n()) %>%
+  ungroup()
+
+# do more cleaning
+data("stop_words")
+tidy_nullacht_speeches <- tidy_nullacht_speeches %>%
+  anti_join(stop_words)  # remove all the stop words
+
+# counts words
+tidy_nullacht_speeches %>%
+  count(word, sort = TRUE)
+
+# load sentiment lexicon
+bing <- sentiments %>%
+  filter(lexicon == "bing") %>%
+  select(-score)
+
+# Calculate sentiment score
+All_sentiment_All <- tidy_nullacht_speeches %>%
+  inner_join(bing) %>%
+  count(Dates, numberWords, index_word = linenumber_word %/% 1, sentiment) %>%
+  spread(sentiment, n, fill = 0) %>%
+  mutate(sentiment = positive - negative)
+All_sentiment_standard_All <- All_sentiment_All %>%
+  group_by(Dates) %>%
+  mutate(Overall_sentiment = sum(sentiment)) %>%
+  mutate(max = max(index_word))%>%
+  mutate(min = 1)%>%
+  ungroup() %>%
+  mutate(index_stan = (100*index_word)/max)
+
+# Plotting:
+ggplot(All_sentiment_standard_All, aes(index_stan, sentiment, label = Dates)) +
+  theme_bw() +
+  #geom_jitter(height = 0.4, show.legend = F, alpha = 0.1) +
+  ggtitle("Hillary's 2008 presidential election speeches") +
+  geom_line(stat="smooth",method = "loess", size = 0.3, show.legend = F, aes(alpha = 0.1, group = Dates, col = sent)) +
+  scale_colour_gradient(limits=c(-63, 83), low="navy blue", high = "red") +
+  geom_smooth(method = "loess", show.legend = F, size =2) +
+  xlab("Standardized sentence index") +
+  ylab("Sentiment (+/-)") +
+  ylim(-2, 2)
+```
+
+Now we can add also the individual sentence scores to the picture. We can do the same for her 2016 speeches and you may notice a difference:
+
+![alt text](/images/strategy-to-speak/plots/2008_speech_points.jpg)
+
+Here the same plot on Hillary's 2016 speeches:
+
+![alt text](/images/strategy-to-speak/plots/20016_speech.jpg)
+
+The dots represent the sentiment scores for each sentence in all of her speeches for that year. The red lines represent a weighted average line, one for each of Hillary's speeches. We can see that the distribution of the dots are slightly more spread out for 2016\. The difference of the spread of the black dots tells us that Hilary Clinton may have made more use of judgemental verds and nouns in sentences in 2016 than in her 2008 campaign, while her overall sentiment across speeches remained relatively balanced.
+
+# Convention speeches:
+
+![alt text](/images/strategy-to-speak/hillary2.jpg) After the conventions, it became clear Clinton will go against Trump in the election finals. Earlier we learned that Clinton is generally balanced in her sentiment. Listeners to the conventional speeches noted how negative Trump's speech was compared to others. Similar to her campaign speeches, Clinton's speech at the 2016 convention was generally considered to be rather balanced, except when she discussed how unfit her opponent Trump is for presidency.
+
+To measure sentiment in conventional speeches, we use [Julia Silge's and David Robinson's tidytext](https://www.r-bloggers.com/the-life-changing-magic-of-tidying-text/) package again. First we load also dplyr and stringr for some basic data wrangling.
 
 ```r
 library(tidytext)
@@ -33,7 +113,7 @@ conv.all_Dem <- Speeches.19_clean_Democrats %>%
   separate(title, c("speaker", "Years"), sep = "_", remove=FALSE)
 ```
 
-The next thing is to "untaken" the text into words that we can analyse it. We also load in stop words and use dplyr's "anti-join" to clean the data. Another thing we arrange is to involve the bing lexicon dataset, which will help us with the clarification of a word's sentiment.
+The next thing is to unnest the text into words. We also load in stop words and use dplyr's "anti-join" to clean the data from filler words and subordinating conjunctions. Another thing we arrange is to involve the bing lexicon dataset. It will allow us to express each word's sentiment.
 
 ```r
 tidy_All_Dem <- conv.all_Dem %>%
@@ -55,7 +135,7 @@ All_sentiment_Dem <- tidy_All_Dem %>%
   separate(title, c("speaker", "Years"), sep = "_", remove=FALSE)
 ```
 
-Now we are good to go to plot (full code can be found in the data repo).
+Now we are good to go to plot. We use ggplot's facet_wrap() function and a weighted LOESS line and n set to 50.
 
 ```r
 library(ggplot2)
@@ -90,100 +170,207 @@ ggplot(All_sentiment_standard_Dem, aes(index_stan, sentiment, group = title)) +
 
 > Length: Over the past three decades, conventional speeches significantly varied in their length and while Bill Clinton's conventional speech listeners in 1996 must have a hard time to stand his 7,000 words, other candidates such as Mondale kept it brief down to 2400.
 
-# Hillary in office, what's it like?
+# Hillary's speeches as Secretary of State
 
-I am interested in Hillary's past. One way to investigate is to check what she said when she filled the job as US Secretary of State at the state department from 2009 to 2013\. First lets get all the remarks she gave loaded into the console:
+We could also delve into Hillary's past. As it was easy to find [her remarks](http://www.state.gov/secretary/20092013clinton/rm/index.htm) from her time when she served as US Secretary of State from 2009 to 2013, we can do a similar meta sentiment analysis for her Secretary of State speeches. The blue lines stand for the sentiment across speeches, and gives an overall sense of a sentiment level across the years, the larger blue circles represent speeches that featured the word "women" in the remark's title. Hillary kept a positive balance across those years.
+
+![pic1]({{ site.url }}/images/strategy-to-speak/plots/women_secretary.jpg)
+
+> Looking only at Hillary's remarks at the US state department from 2009 to 2013, she gave a lot more speeches in her first year as Secretary of State. Clinton is knows for being a women's right activist. It is not surprising that the word "Women" was part of many speeches she gave as Secretary of State.
+
+# What are Hillary's 2016 campaign speeches all about?
+
+We want to find out the core topics Hillary Clinton spoke about in her campaign speeches. For this, we will use the tidytext function bind_tf_idf(). From our scraping activity, we received 96 speeches from Hillary's 2016 campaign website. Let's tidy up the dataset first, and then perform a term-frequency-inverse-document-frequency (ft-idf) analysis on the text corpus.
 
 ```r
-remakrs <- read.csv("link", header = T)
+library(dplyr)
+library(tidytext)
+
+# read in the data:
+pr_2016 <- read.csv("clinton_2016.csv", header = T, stringsAsFactors = F)
+pr_2016 <- pr_2016 %>% group_by(wann) %>% mutate(group_speech = n()) %>% ungroup() %>% select(-X)
+
+speeches_2016 <- pr_2016 %>% group_by(wann) %>% unnest_tokens(word, speech1) %>% count(wann, word, sort = T)
+
+speeches_2016_total <- speeches_2016 %>% group_by(wann) %>%summarise(all_speeches = sum(n))
+
+speeches_2016 <- left_join(speeches_2016, speeches_2016_total)
+
+speeches_2016 <- speeches_2016 %>% bind_tf_idf(word, wann, n)
+
+## Plotting the highest frequency for each speech over time:
+speeches_2016_termFr_plot <- speeches_2016 %>%
+  group_by(wann) %>%
+  filter(tf_idf == max(tf_idf))
+
+speeches_2016_termFr_plot_dates <- speeches_2016_termFr_plot %>%
+  mutate(dates = as.Date(as.character(wann), "%B%d,%Y")) %>%
+  filter(dates != "2015-05-19") %>%
+  filter(all_speeches < 50000) %>%
+  mutate(word = toupper(word))
+
+ggplot(speeches_2016_termFr_plot_dates, aes(dates, all_speeches, label = word)) +
+  geom_point(alpha = 0.5) +  geom_line(alpha = 0.1, size = 3) +  theme_bw() + ggtitle("TF IDF analysis of Hillary Clinton speeches, 2016") +
+  geom_text(check_overlap = T, size = 3, nudge_x = 6, aes(label = word)) + ylab("Number of words in speech") + xlab("2016, dates")
 ```
 
-# Hillary and Twitter...
+![pic1]({{ site.url }}/images/strategy-to-speak/plots/plot_speeches_tf_idf_2.jpg)
 
-wrapup/conclusion
+In this chart, we can visualize [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) Hillary's speeches over time. The Y axis shows the number of words the term appeared in a speech relative to the overall number of words in each speech. The X axis represents dates the speeches were given (according to Hillary's campaign blog). The line tell you the most frequent terms calculated against the most frequent terms across the entire set of speeches. It gives us a relatively good understanding of the topics she talked most frequently about, and how this changed over the course of the presidential-rally.
 
-call to action:
-
-# Who is Hillary Clinton?
-
-Next, it was interesting to analyse Hillary's past speech records. It was easy to find her remarks from back when she served as US Secretary of State from 2009 to 2013.
-
-![pic1]({{ site.url }}/images/strategy-to-speak/plots/plot.svg)
-
-> Looking only at Hillary's remarks at the US state department from 2009 to 2013, she gave a lot more speeches in her first year as Secretary of State. While the word international appeared in titles of remarks which where was rated as more positive in 2009, she later must have talked about more serious subjects as the sentiment scores decline.
-
-> As we also know Clinton is and was always a speaker for women's rights. It is not surprising that the word "Women" was part of many speeches she gave as Secretary of State.
-
-hc, as the junior US Senator representing New York from 2001 to 2009, as First Lady Bill's presidency (1993 to 2001), and First Lady of Arkansas during her husband's governorship from 1979 to 1981/1983 to 1992\. So loads of data of speeches.
-
-Turns out there is an R package to measure text sentument analysis as easy as stealing candy from a baby. What of the key questions that has tickled me to research this story was how does today's Hillary Clinton compares to her former self from years ago. To learn more about it, I first concentrated on her time at the US Department of State, from 2009 to 2013\. In the title of her speeches back then, the word "women" appeared many times. Clinton is know to fight for women's rights across the years:
-
-She was also giving many speeches that contained the word "international", however the sentiment of her international speeches may have changed and became more series over the years. This could be due to the fact that Hillary became more confident in talking openly about problems with other countries.
-
-Lastly, speeches that contained "with president" in the title were not given as often i i thought.
-
-## Conventional speeches
-
-If comparing the past years's conventional speeches, showing trump as a neagive outlier:
-
-While the sentiment analysis on Hillary's speech showed evidence of an equilibrium in style for positive and negative sentiment, Trump's seemed to have presented one of the most negative talks across three decades of conventional speeches.
-
-Although Trump started and ended on a high note, he quickly became negative after his initial "we will lead our country back to safety, prosperity, and peace". Negative scores started to appear when Trump discussed that this convention would occur at a moment of crisis, and how attacks on the police and how the terrorism in our cities would threaten people's lives.
-
-Hillary, on the contrary was generally balanced. Her talk got a positive sentiment score when she explained how America would need everyone to lend their energy, talents, ambition to making the nation better and stronger. However, her sentiment score decreases significantly when she questioned Trump's temperament to be commander in chief. "Donald Trump can't even handle the rough and tumble of a presidential campaign", Clinton said.
-
-conclusion? Overall, conventional speakers across the past conventions kept their speech rather positive than negative. To point out, that the status quo is bad, doesn't make a president. Instead, it should matter how good the solutions are the candidate proposes to fix problems. Trump's strategy was clearly to stand out, which he succeeded in. Clinton's talk on the other hand was to discuss facts, which may have made her speech's sentiment more dry and to less fluctuate across its length.
-
-The graph intents to give an idea of the sentiment of Hillary Clinton speeches and her remarks for the time period when she was acted as secretary of state. The small dots represent speeches, the y values the sentiment score the remark was judged on across each corpus of speech text that was published by the US. department of state website. We can see that Hillary Clinton made many more speeches in the beginning of her secretary of state carreer in 2009 than later on. Her sentiment changes over the period of the time. Espicially around key topics such as ... when we encounter a spike in her sentiment.
-
-For a short while i had the chance to be a speaker. I spoke on conferences and meetings, mainly as a journalist. Political leaders of the world use their speech as their core medium to deliver their point of view, their convinctions, and surely to justify topics and actions. The yield is an engaging audience.
-
-Needless to say, that text one of the most exciting data sources, the so to speak upcoming new cool new kid on the blog among data sources, analysing speeches by politiciancs might be an obvious first choice, but can reveal a lot about their style and their intentions.
-
-If you do or did any public speaking, you might find it interesting if and how your style changed over the year.
-
-## Text analysis in R:
+To make things more interesting, we can compare it to the number of occasions for each speech when she mentioned "Trump" (also measured in term frequency). In speeches, Trump's name was mentioned along "Court", "California", and "Police".
 
 ```r
-knitr::opts_chunk$set(echo = TRUE)
+ggplot(speeches_2016_termFr_plot_dates, aes(dates, tf, label = word)) +
+  geom_point(alpha = 0.5) + geom_line(alpha = 0.1, size = 3, aes(col = "tf")) +  theme_bw() + ggtitle("TF IDF analysis of Hillary Clinton speeches, 2016") +
+  geom_text(check_overlap = T, size = 3, nudge_x = 6, aes(label = word)) + ylab("The number of times this word appears in the speech") + xlab("2016, dates") +
+  geom_line(inherit.aes = F, alpha = 0.1, size = 3, data = speeches_2016_termFr_plot_trump_dates, aes(dates, tf)) +
+  geom_point(inherit.aes = F, data = speeches_2016_termFr_plot_trump_dates, aes(dates, tf, color = "Trump mentioned")) + scale_colour_brewer(palette = "Set1")
 ```
 
-## R Markdown
+![pic1]({{ site.url }}/images/strategy-to-speak/plots/Rplot02.jpeg)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Trump's name fell increasingly over the past months, possibly a strategic answer to Trump's verbal assaults in his hate speeches. She must have mentioned and attacked him more heavily also in the course of his increasing chances of winning.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Who is Hillary's speeches most aligned with?
+
+Politicians have their own style of course, but could we find out how her word frequencies differ to other member of the political family. Comparing Hillary's speeches with campaign speeches by Barack Obama in 2012, we understand that both aren't pretty well aligned. If aligned, the chart would look different. The dots would cluster more heavily around blue line and be less spread out to the X and Y dimensions.
+
+![pic1]({{ site.url }}/images/strategy-to-speak/plots/plot_speeches_Obama_vs_hillary.jpg)
+
+If we do it for Trump's campaign speeches, there is even a wider spread. This comes at no surprise. Both political figures have a very distinct speaking style.
+
+![pic1]({{ site.url }}/images/strategy-to-speak/plots/Rplot04.jpeg)
+
+# Unsupervised learning: clustering Hillary's 2016 campaign speeches
+
+Clustering is an unsupervised machine learning task, helping with automatically dividing our speech data into topic clusters. The aim of this exercise is to find the natural grouping of the speeches, which we will try to label later. We have seen that Hillary discussed varies topics, including childcare, the police and veterans. Without further knowledge of what comprises a speech cluster, how can a computer know where one group ends and another begins? The answer lies in the concept of similarity.
+
+The first step is to tokenize our document again, using the wonderful tidytext package. Each document is a date the speech, or multiple speeches were delivered (in the data we find dates that feature multiple speeches).
 
 ```r
-df <- data.frame(Circulatory=c(32,26,19,16,14,13,11,11),
-                 Mental=c(11,11,18,24,23,24,26,23),
-                 Musculoskeletal=c(17,18,13,16,12,18,20,26),
-                 Cancer=c(10,15,15,14,16,16,14,14))
-
-df$year <- seq(1975,2010,by=5)
-
+library(dplyr)
+library(tidytext)
+library(stringr)
 library(tidyr)
-library(ggplot2)
-
-gathered <- gather(df, cause, percentage, -year)
-View(gathered)
-crossed <- crossing(gathered, highlight = unique(gathered$cause))
-View(crossed)
-
-ggplot(crossed, aes(year, percentage, group = cause,
-                    color = highlight == cause)) +
-  geom_line(show.legend = FALSE) +
-  facet_wrap(~ highlight) +
-  scale_color_manual(values = c("gray", "darkblue")) +
-  theme_minimal()
+speeches_2016_unnest_tokens <- speeches_2016_correlation %>%
+     tidytext::unnest_tokens(word, text) %>%
+     anti_join(stop_words) %>%
+     count(docdate, word, sort = TRUE) %>%
+     ungroup()
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
+To feed our data to a clustering model - we will use the topicmodels package -, we need the data to be in the form of a [Document Term Matrix](https://en.wikipedia.org/wiki/Document-term_matrix). The cast_dtm() function in the tidytext package allows us to cast our speech data into a one-token-per-row table of the class DocumentTermMatrix.
 
 ```r
-plot(pressure)
+speeches_2016_dtm <- speeches_2016_unnest_tokens %>%
+                     cast_dtm(docdate, word, n)
+
+class(speeches_2016_dtm)
+ # [1] "DocumentTermMatrix"    "simple_triplet_matrix"
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Once we have our Document Term Matrix in place, we can let the [Topicmodels](https://cran.r-project.org/web/packages/topicmodels/index.html) package do the rest of the work, and cluster each speech. Before we do this however, we want to choose an appropriate k value. k describes the number of clusters we want the model to bin our speech documents by. In this case we chose 15\. However this number is arbitrary. In fact, what we see is that there are really 5 main clusters, the biggest one concerns people. However, as we only observing here the most frequent appearances, we should be careful to rely too heavily on the most frequent instead of subsequent most frequent terms.
+
+Most frequent terms our cluster model identified: ![pic1]({{ site.url }}/images/strategy-to-speak/plots/cluster_algorythm2.jpeg)
+
+For a different approach, we could play around with k. In a new case scenario, we might want to classify and set k to 3\. An explaination why we do so, can be found in the code. We refer to the "[elbow method](https://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set)".
+
+```r
+topicmodel_hillary <- LDA(speeches_2016_dtm, k = 3, control = list(seed = 100))
+
+hillary_lda_gamma <- tidytext:::tidy.LDA(topicmodel_hillary, matrix = "gamma")
+class(hillary_lda_gamma)
+# [1] "tbl_df"     "tbl"        "data.frame"
+
+hillary_lda_gamma <- hillary_lda_gamma %>%
+  filter(document != "May 19, 2015") %>%
+  filter(gamma > 0.9) # we filter the ones with a high gamma value
+
+topicmodel_hillary_tidydata <- tidytext:::tidy.LDA(topicmodel_hillary)
+topic_terms_1 <- topicmodel_hillary_tidydata %>%
+  group_by(topic) %>%
+  top_n(1, beta) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+
+hillary_lda_gamma <- hillary_lda_gamma %>%
+  inner_join(topic_terms_1)
+
+ggplot(hillary_lda_gamma, aes(as.Date(document, "%B%d, %Y    "), fill = as.factor(topic))) +
+  geom_bar(show.legend = T, aes(position = "fill")) +
+  ylim(0, 1) + theme_bw() +  scale_colour_brewer(palette = "Set1") +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()) + ylab("") + xlab("2016, time speeches were given")
+```
+
+If we run this in ggplot, we can see that Hillary had three distinct groups of speeches. Cluster one is concerned with the people and presidency (in red), cluster two on the job market and the country, and a third one on Donald Trump (showing up correctly in blue in most recent times when she must have mentioned him most frequently, in the midst of the campaign race). ![pic1]({{ site.url }}/images/strategy-to-speak/plots/time_speeches.jpeg)
+
+## Clustering with K-means
+
+Clustering with k-means is another unsupervised classification method. Again, the catch is that the class labels obtained from an unsupervised classier are without intrinsic meaning, and needs our domain knowledge for labelling. This time we make use of the [stats package](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html). For this, our previous document-term matrix is perfect as an input.
+
+```r
+library(stats)
+
+# set k
+set.seed(1000)
+topicmodel_hillary_kmeans <- kmeans(speeches_2016_dtm, 3)
+
+# creates a kmeans object
+class(topicmodel_hillary_kmeans)
+# [1] "kmeans"
+
+# The distribution of the clusters
+topicmodel_hillary_kmeans$size
+# [1] 42  1  4
+
+topicmodel_hillary_kmeans:
+(Here the percentage of variance is calculated as the ratio of the between-group variance to the total variance)
+#If we want to calculate the sum of squares by cluster
+topicmodel_hillary_kmeans$betweenss /topicmodel_hillary_kmeans$tots = 0.8553458 or 85.53%
+
+# for k = 2, we get: 79.4 %, for 3 = 85.5 %, for 4 = 87.36 and for 5 = 88.13 % (we could locate the "elbow" at k = 3)
+```
+
+We chose k = 3 according to the Elbow method, that looks at the percentage of variance explained as a function of the number of clusters. One should choose a number of clusters so that adding another cluster doesn't give much better modeling of the data.
+
+The data given by x are clustered by the k-means method, which aims to partition the points into k groups such that the sum of squares from points to the assigned cluster centers is minimized. At the minimum, all cluster centers are at the mean of their Voronoi sets. We see that the model binned the speeches somewhat unevenly.
+
+```r
+# We use data.table to get the clusters and dates of our documents into a df
+library(data.table)
+df <- as.data.frame(topicmodel_hillary_kmeans$cluster)
+setDT(df, keep.rownames = TRUE)[]
+names(df)[1] <- "docdate"
+names(df)[2] <- "cluster"
+
+# Perform an inner join:
+speeches_2016_unnest_tokens_join <- speeches_2016_unnest_tokens %>%
+  inner_join(df)
+
+# Show clusters in speeches over time, and most frequent words:
+speeches_2016_unnest_tokens_join_plot <- speeches_2016_unnest_tokens_join %>%
+  group_by(docdate) %>%
+  top_n(n=1) %>%
+  summarise(cluster = (mean(cluster)), wordmax = (max(n, word)), max = max(n)) %>%
+  filter(docdate != "May 19, 2015")
+
+  ggplot(speeches_2016_unnest_tokens_join_plot, aes(as.Date(docdate, "%B%d, %Y    "), y = 0.5, col = as.factor(cluster), size = max, show.legend = F)) +
+           geom_point(show.legend = F) + scale_size(range = c(0, 30)) +
+   ylim(0, 1) + theme_bw() +
+  geom_label_repel(show.legend = F,
+    aes(as.Date(docdate, "%B%d, %Y    "), y = 0.5, fill = factor(cluster), label = (wordmax)),
+    fontface = 'bold', color = 'white',
+    box.padding = unit(0.25, "lines"),
+    point.padding = unit(0.5, "lines")
+  ) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank()) + ylab("") + xlab("2016, date speeches were given")
+```
+
+Most frequent terms our cluster model identified with the K-means clustering model: ![pic1]({{ site.url }}/images/strategy-to-speak/plots/cluster_kmeans.jpeg) We get a somewhat different result. The green bubble is a bit flawed, as it comprises multiple speeches given on the same date. We would also judge that the model may have had a difficult time to cluster the speeches in equal bins. This could imply that speeches may have been very similar across her campaign rally.
+
+# Wrapping up
