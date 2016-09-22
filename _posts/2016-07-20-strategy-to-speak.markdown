@@ -94,9 +94,9 @@ The dots represent the sentiment scores for each sentence in all of her speeches
 
 # Convention speeches:
 
-![alt text](/images/strategy-to-speak/hillary2.jpg) After the conventions, it became clear Clinton will go against Trump in the election finals. Earlier we learned that Clinton is generally balanced in her sentiment. Listeners to the conventional speeches noted how negative Trump's speech was compared to others. Similar to her campaign speeches, Clinton's speech at the 2016 convention was generally considered to be rather balanced, except when she discussed how unfit her opponent Trump is for presidency.
+![alt text](/images/strategy-to-speak/hillary2.jpg) After the conventions, it became clear Clinton will go against Trump in the election finals. Earlier we learned that Clinton is generally balanced in her sentiment. Listeners to the convention speeches noted how negative Trump's speech was compared to others. Similar to her campaign speeches, Clinton's speech at the 2016 convention was generally considered to be rather balanced, except when she discussed how unfit her opponent Trump is for presidency.
 
-To measure sentiment in conventional speeches, we use [Julia Silge's and David Robinson's tidytext](https://www.r-bloggers.com/the-life-changing-magic-of-tidying-text/) package again. First we load also dplyr and stringr for some basic data wrangling.
+To measure sentiment in convention speeches, we use [Julia Silge's and David Robinson's tidytext](https://www.r-bloggers.com/the-life-changing-magic-of-tidying-text/) package again. First we load also dplyr and stringr for some basic data wrangling.
 
 ```r
 library(tidytext)
@@ -164,11 +164,11 @@ ggplot(All_sentiment_standard_Dem, aes(index_stan, sentiment, group = title)) +
 
 ![pic1]({{ site.url }}/images/strategy-to-speak/plots/conventionsHillary.svg)
 
-> The plot shows the sentiment analysis for democrate conventional speeches over the past years. A blue weighted loess line is introduced that shows a general trend over the course of each speech. Clearly Hillary's speech is rather balanced. We can do the same thing for the republican conventional speeches and witness one of the most negative talks over the past decades by candidate Trump.
+> The plot shows the sentiment analysis for democrate convention speeches over the past years. A blue weighted loess line is introduced that shows a general trend over the course of each speech. Clearly Hillary's speech is rather balanced. We can do the same thing for the republican convention speeches and witness one of the most negative talks over the past decades by candidate Trump.
 
 ![pic1]({{ site.url }}/images/strategy-to-speak/plots/conventionsTrump.svg)
 
-> Length: Over the past three decades, conventional speeches significantly varied in their length and while Bill Clinton's conventional speech listeners in 1996 must have a hard time to stand his 7,000 words, other candidates such as Mondale kept it brief down to 2400.
+> Length: Over the past three decades, convention speeches significantly varied in their length and while Bill Clinton's convention speech listeners in 1996 must have a hard time to stand his 7,000 words, other candidates such as Mondale kept it brief down to 2400.
 
 # Hillary's speeches as Secretary of State
 
@@ -371,6 +371,8 @@ speeches_2016_unnest_tokens_join_plot <- speeches_2016_unnest_tokens_join %>%
       axis.ticks = element_blank()) + ylab("") + xlab("2016, date speeches were given")
 ```
 
-Most frequent terms our cluster model identified with the K-means clustering model: ![pic1]({{ site.url }}/images/strategy-to-speak/plots/cluster_kmeans.jpeg) We get a somewhat different result. The green bubble is a bit flawed, as it comprises multiple speeches given on the same date. We would also judge that the model may have had a difficult time to cluster the speeches in equal bins. This could imply that speeches may have been very similar across her campaign rally.
+Most frequent terms our cluster model identified with the K-means clustering model: ![pic1]({{ site.url }}/images/strategy-to-speak/plots/cluster_kmeans.jpeg) We get a somewhat different result. However we see that is reflects the rally. After the convention in August the class changes from green to blue. Hillary talks much more about Trump, and now as she knows that she is the final opponent, she changes her topics accordingly. The green bubble is a bit flawed, as it comprises multiple speeches given on the same date. We would also judge that the model may have had a difficult time to cluster the speeches in equal bins. This could imply that speeches may have been very similar across her campaign rally.
 
 # Wrapping up
+
+In this post we learned that Hillary's strategy to speak is one that is on the positive side, that her latest campaign speeches must have featured more emotional language to drive up sentences's sentiment scores, and how she compared to other speakers at the presidential convention, and Barack Obama for the campaign speeches. We saw evidence on her standing on women's rights, the key topics she covered in her 2016 campaign rally, and how this related to her opponent Trump. We also learned that it might be harder to correctly classify her speeches, as they are very similar. However we managed to apply machine leaning to get a rough idea of possible labels, including children and the future, job market, country domestic matters, Israel and a large group for the rest, mainly concerning voters. Eventually we applied the K-means clustering model and were able to receive a different grouping, that was aligned with the changes in the rally.
