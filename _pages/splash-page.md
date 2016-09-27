@@ -75,11 +75,9 @@ I currently work as a digital data journalist and developer at the Economist and
 
 # Tools:
 
-For the analysis, scraping and machine learning part of my night job as data cruncher, I use R and python, for publishing graphics on the web i use JavaScript and D3.js, for APIs I use Python, for big data Spark, for graph-data Neo4J and for geo stuff QGIS. All code and data are available on Github, all thoughts and ideas are mine, and created in my free time.
+For the analysis, scraping and machine learning part, I use R and python, for publishing graphics on the web I use JavaScript and D3.js, for big data Spark with R, for graph-data Neo4J and for geo stuff QGIS, Mapbox.js and D3.js. Some code and data are available on my Github, all thoughts and ideas are mine, and created in my spare time (as so called "night owl data scientist").
 
-# Work:
-
-![economist pic](http://talkingbiznews.com/wp-content/uploads/2013/06/the-economist-logo.jpg)
+# Data journalism:
 
 - [Germany refugee index](http://www.economist.com/blogs/graphicdetail/2016/04/daily-chart-8)
 - [Broadway prediction model](http://www.economist.com/blogs/graphicdetail/2016/07/daily-chart-18)
@@ -89,4 +87,4 @@ For the analysis, scraping and machine learning part of my night job as data cru
 - [The evolution of Islamic State](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-10)
 - [Where does foreign aid go?](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-8)
 
-Last year, I started [DataCandy.co.uk](http://datacandy.co.uk/) and created an [interactive design portfolio](http://datacandy.co.uk/design_portfolio/main/index.html).
+Last year, I started [DataCandy.co.uk](http://datacandy.co.uk/). A short portfolio for 2014/15 on interactive graphics can be found [here:](http://datacandy.co.uk/design_portfolio/main/index.html).

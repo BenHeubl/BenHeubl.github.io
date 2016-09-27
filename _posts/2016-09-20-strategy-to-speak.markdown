@@ -14,7 +14,7 @@ tags:
 
 # "I'm in, and I'm in to win: 2008 vs. 2016
 
-To compare Clinton's potential candidacy in 2008 with her current one, we scrape speech data from both campaigns. Her 2016 speeches are available on Hillary's campaign website, while speeches delivered 2007 and 2008 are to be found [here](http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000).
+To compare Clinton's potential candidacy in 2008 with her current one, we will scrape speech data from both campaigns. Her 2016 speeches are available on Hillary's campaign website, while speeches delivered 2007 and 2008 are to be found [here](http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000).
 
 ![alt text](/images/strategy-to-speak/plots/2008_speech_lines.jpg) To end up with a relative reliable sentiment line, we will use the [tidytext package](https://cran.r-project.org/web/packages/tidytext/index.html), by David Robinson and Julia Silge. Both made a great effort to explain examples on their blogs ([Julia Silge](http://juliasilge.com/blog/), [David Robinson](http://varianceexplained.org/)).
 
@@ -90,7 +90,7 @@ Here the same plot on Hillary's 2016 speeches:
 
 ![alt text](/images/strategy-to-speak/plots/20016_speech.jpg)
 
-The dots represent the sentiment scores for each sentence in all of her speeches for that year. The red lines represent a weighted average line, one for each of Hillary's speeches. We can see that the distribution of the dots are slightly more spread out for 2016\. The difference of the spread of the black dots tells us that Hilary Clinton may have made more use of judgemental verds and nouns in sentences in 2016 than in her 2008 campaign, while her overall sentiment across speeches remained relatively balanced.
+The dots represent the sentiment scores for each sentence in all of her speeches for that year. The red lines represent a weighted average line, one for each of Hillary's speeches. We can see that the distribution of the dots are slightly more spread out for 2016\. The difference of the spread of the black dots tells us that Hilary Clinton may have made more use of more judgemental verbs and nouns in sentences in 2016 than in her 2008 campaign, while her overall sentiment across speeches remained relatively balanced.
 
 # Convention speeches:
 
@@ -216,7 +216,7 @@ ggplot(speeches_2016_termFr_plot_dates, aes(dates, all_speeches, label = word)) 
 
 ![pic1]({{ site.url }}/images/strategy-to-speak/plots/plot_speeches_tf_idf_2.jpg)
 
-In this chart, we can visualize [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) Hillary's speeches over time. The Y axis shows the number of words the term appeared in a speech relative to the overall number of words in each speech. The X axis represents dates the speeches were given (according to Hillary's campaign blog). The line tell you the most frequent terms calculated against the most frequent terms across the entire set of speeches. It gives us a relatively good understanding of the topics she talked most frequently about, and how this changed over the course of the presidential-rally.
+In this chart, we can visualize [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) Hillary's speeches over time. The Y axis shows the number of words the term appeared in a speech relative to the overall number of words in each speech. The X axis represents dates the speeches were given (according to Hillary's campaign blog). The line gives you an idea of the most frequent terms calculated against the most frequent terms across the entire set of speeches. It gives us a relatively good understanding of the topics she talked most frequently about, and how this changed over the course of the presidential-rally.
 
 To make things more interesting, we can compare it to the number of occasions for each speech when she mentioned "Trump" (also measured in term frequency). In speeches, Trump's name was mentioned along "Court", "California", and "Police".
 
@@ -371,7 +371,7 @@ speeches_2016_unnest_tokens_join_plot <- speeches_2016_unnest_tokens_join %>%
       axis.ticks = element_blank()) + ylab("") + xlab("2016, date speeches were given")
 ```
 
-Most frequent terms our cluster model identified with the K-means clustering model: ![pic1]({{ site.url }}/images/strategy-to-speak/plots/cluster_kmeans.jpeg) We get a somewhat different result. We see that it hardly reflects the rally. After the convention in August the class changes from green to blue in the previous model, but here we see little change. Hillary talked much more about Trump, and as she knows that she remained to be the final opponent, she should change her topics accordingly. The green bubble is a bit flawed, as it comprises multiple speeches given on the same date. We can observe that our k-means model has some difficulties to cluster the speeches in equal bins. This could imply that speeches may have been very similar across her campaign rally, or a poor selection of k and the absence of clean data.
+Most frequent terms our cluster model identified with the K-means clustering model: ![pic1]({{ site.url }}/images/strategy-to-speak/plots/cluster_kmeans.jpeg) We get a somewhat different result. We see that it hardly reflects the rally. After the convention in August the class changes from green to blue in the previous model, but here we see little change. Hillary talked much more about Trump, and as she knows that she is now the final opponent, she should change her topics accordingly. The green bubble is a bit flawed, as it comprises multiple speeches given on the same date. We can observe that our k-means model has some difficulties to cluster the speeches in equal bins. This could imply that speeches may have been very similar across her campaign rally, or a poor selection of k and the absence of clean data.
 
 # Wrapping up
 

@@ -20,13 +20,13 @@ Here, I use machine learning to make a judgement on Hillary Clinton's uniqueness
 
 ![alt text](/images/naive/clinton_happy.gif)
 
-In theory, if the model doesn't preforms well, Hillary Clinton's speeches - including her words and phrases and topics - could be very similar to other political speakers. From here, we could judge her on for being not unique enough, and not able to voice her own though and words enough of the time (whatever that might mean). Many US voters these days, I am convinced value a presidential candidate who is herself, as we can see from the popularity of Donal Trump (who is all himself, in any speech or interview).
+In theory, if the model doesn't preform well, Hillary Clinton's speeches - including her words and phrases and topics - could be very similar to other political speakers. From here, we could judge her on for being not unique enough, and not able to voice her own though and words enough of the time (whatever that might mean). Many US voters these days, I am convinced value a presidential candidate who is herself, as we can see from the popularity of Donal Trump (who is all himself, in any speech or interview).
 
 On the contrary, if the model doesn't do well, I may either blame myself on wrongly calibrating the model, or blame the state of the text data collected. If we could provide evidence that Hillary Clinton's speeches are unique enough - in the sense that the classifying model is doing well - we can proof that she is who she claims to be.
 
 ## The catch
 
-The approach has some hooks. As we only apply a bag of words methodology, the most frequent words have a greater impact on the classifier. The dates the speeches were delivered have not taken into account either. Applying Naive Bayes (NB), has some additional drawbacks:
+The approach has some hooks. As we only apply a bag of words methodology, the most frequent words have a greater impact on the classifier. The dates the speeches were delivered have not been taken into account either. Applying Naive Bayes (NB), has some additional drawbacks:
 
 - While the Naive Bayes classifier is said to be fast, and very effective, able to deal with noisy and missing data and requests relatively few examples for training (it is easy to also obtain the estimated probability for a prediction),
 - it relies on an often-faulty assumption of equally important and independent features. NB isn't ideal for datasets with many numeric features and estimated probabilities are less reliable than the predicted classes.
@@ -41,7 +41,7 @@ I will run you through the process on how prepare text data and how to classify 
 
 # Get the data:
 
-To train a Naive Bayes model, we need text data. We fetch it from Hillary's campaign [webstie][5b26ae86].
+To train a Naive Bayes model, we need text data. We fetch it from Hillary's campaign [website][5b26ae86].
 
 ```r
 # Clinton 2016 speeches from Hillaryclinton.com:
@@ -423,7 +423,7 @@ wordcloud(Old_Hillary$text, max.words = 30, scale = c(3, 0.5))
 
 ![alt text](/images/naive/plots/oldHill_wordcloud.png)
 
-The speeches as Secretary of State might not be perfect to judge on her campaign speaking style for the 2016 presidential election. One should mind to compare apples with oranges. To find a possibly more closely related dataset, Hillary's presidential campaign speeches from her 2008 presidential election campaign might serve us well. Again, fetched data from the web, this time from the [UCSB page](http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000) . We see our model in action on the following instances:
+The speeches as Secretary of State might not be perfect to judge on her campaign speaking style for the 2016 presidential election. To find a possibly more closely related dataset, Hillary's presidential campaign speeches from her 2008 presidential election campaign might serve us well. Again, fetched data from the web, this time from the [UCSB page](http://www.presidency.ucsb.edu/2008_election_speeches.php?candidate=70&campaign=2008CLINTON&doctype=5000) . We see our model in action on the following instances:
 
 ```r
 Clinton_2008_Presidential_Election                       Hillary_2016
@@ -454,7 +454,7 @@ Here is an overview on how well the model performed on various speakers and text
 
 ![alt text](/images/naive/plots/conclusion.jpg) Overall, Naive Bayes for text - in our case speech - classification is a powerful tool and works reliable in clean data. To judge how unique a person's speaking style is works as long it is not being mixed up with written text data. Speeches are different from copy, and one doesn't writes as one speaks. For Hillary's tweets, this little experiment did not work.
 
-However, our models could establish some evidence that showed that she is indeed her own persona. Her speeches may or may not reflect her own believes but certainly her own speaking style (and not her husband's or other people she worked with in the past, such as Barack Obama). Her campaign is her unique voice, unique even in the sense of her past presidential rally in 2008.
+However, our models could establish some evidence that showed that she is indeed her own persona. Her speeches may or may not reflect her own beliefs but certainly her own speaking style (and not her husband's or other people she worked with in the past, such as Barack Obama). Her campaign is her unique voice, unique even in the sense of her past presidential rally in 2008.
 
 ![alt text](/images/naive/giphy2.gif)
 
