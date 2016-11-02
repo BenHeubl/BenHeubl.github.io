@@ -65,19 +65,19 @@ feature_row4:
     btn_class: btn--inverse
 ---
 
-As in my opinion, data journalists must use every possible opportunity to help the data to speak up.
+> Let the data speak
 
-In general this site intents to work with all sorts of data science tools and techniques, and should contribute to data journalism overall. All ideas and thoughts shared on this blog are my own.
+I use this blog as an innovation lab for new data stories and novel data journalism approaches. Machine learning, new technology and explorative data analysis shall be the core of these posts. All ideas and thoughts shared on this blog are my own.
 
 # Who am I?
 
-I currently work as a digital data journalist and developer at the Economist and only run this blog in my spare time as a fun project. My passion is to tell new stories with data.
+I currently work as a digital data journalist and developer at the Economist and only run this blog in my spare time, much to my amusement. My passion is to tell new, untold stories with data.
 
 # Tools:
 
-For the analysis, scraping and machine learning part, I use R and python, for publishing graphics on the web I use JavaScript and D3.js, for big data Spark with R, for graph-data Neo4J and for geo stuff QGIS, Mapbox.js and D3.js. Some code and data are available on my Github, all thoughts and ideas are mine, and created in my spare time (as so called "night owl data scientist").
+For the analysis, scraping and machine learning part, I use R and python, for publishing graphics on the web I use JavaScript and D3.js, for big data Spark with R, for graph-data Neo4J and for geo stuff QGIS, Mapbox.js and D3.js. Some code and data are available on my Github (and some are on Gitlab).
 
-# Data journalism:
+# Cherry picked: Data journalism posts @TheEconomist:
 
 - [Germany refugee index](http://www.economist.com/blogs/graphicdetail/2016/04/daily-chart-8)
 - [Broadway prediction model](http://www.economist.com/blogs/graphicdetail/2016/07/daily-chart-18)
@@ -85,6 +85,10 @@ For the analysis, scraping and machine learning part, I use R and python, for pu
 - [Where does foreign aid go?](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-8)
 - [Olympic events past, present and pretend](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-15)
 - [The evolution of Islamic State](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-10)
-- [Where does foreign aid go?](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-8)
+- [Contribution to the Economist radio show (minute 23:20)](https://soundcloud.com/theeconomist/the-economist-asks-why-does-donald-trump-want-to-be-president)
+- [Facial recognition Economist post on presidential debates](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-12)
+- [How guns get into film](http://www.economist.com/blogs/prospero/2016/10/bang-your-buck)
+- [Semantic text analysis](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-5)
+- [Test-tube miracles](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-5)
 
-Last year, I started [DataCandy.co.uk](http://datacandy.co.uk/). A short portfolio for 2014/15 on interactive graphics can be found [here:](http://datacandy.co.uk/design_portfolio/main/index.html).
+Last year, I started the blog [DataCandy.co.uk](http://datacandy.co.uk/). A short portfolio of interactive graphics and stories can be found [here:](http://datacandy.co.uk/design_portfolio/main/index.html) and some of my data journalism freelance work in the area of healthcare and technology can be found [here](http://innovatemedtec.com/content/series/DataVision). Previously, I wrote articles for WIRED, Forbes and TechCrunch.
