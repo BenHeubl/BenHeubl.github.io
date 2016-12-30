@@ -89,6 +89,6 @@ For the analysis, scraping and machine learning part, I use R and python, for pu
 - [Facial recognition Economist post on presidential debates](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-12)
 - [How guns get into film](http://www.economist.com/blogs/prospero/2016/10/bang-your-buck)
 - [Semantic text analysis](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-5)
-- [Test-tube miracles](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-5)
+- [Test-tube miracles](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-25)
 
 Last year, I started the blog [DataCandy.co.uk](http://datacandy.co.uk/). A short portfolio of interactive graphics and stories can be found [here:](http://datacandy.co.uk/design_portfolio/main/index.html) and some of my data journalism freelance work in the area of healthcare and technology can be found [here](http://innovatemedtec.com/content/series/DataVision). Previously, I wrote articles for WIRED, Forbes and TechCrunch.
