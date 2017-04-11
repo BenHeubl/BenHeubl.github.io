@@ -1,5 +1,5 @@
 ---
-title: How does the education of Americans relate to that of their spouses?
+title: How does the education of your parents relate to that of your spouse?
 header:
   teaser: 'https://farm5.staticflickr.com/4076/4940499208_b79b77fb0a_z.jpg'
 categories:
