@@ -11,8 +11,7 @@ header:
   cta_url: 'https://github.com/benheubl/'
   caption: 'Photo credit: [**Allie Moh**](http://alliemoh.com/index.html)'
 excerpt: >-
-  Data Dico means "Data speaks" or "Data explains". This is my data science and
-  journalism blog.
+  Dic veritatem solam
 intro:
   - excerpt: >-
       Nullam suscipit et nam, tellus velit pellentesque at malesuada, enim
@@ -65,30 +64,18 @@ feature_row4:
     btn_class: btn--inverse
 ---
 
-> Let the data speak
+I am a nerd and work for the FT. All ideas and thoughts shared are my own.
 
-I use this blog as an innovation lab for new data stories and novel data journalism approaches. Machine learning, new technology and explorative data analysis shall be the core of these posts. All ideas and thoughts shared on this blog are my own.
-
-# Who am I?
-
-I currently work as a digital data journalist and developer at the Economist and only run this blog in my spare time, much to my amusement. My passion is to tell new, untold stories with data.
-
-# Tools:
-
-For the analysis, scraping and machine learning part, I use R and python, for publishing graphics on the web I use JavaScript and D3.js, for big data Spark with R, for graph-data Neo4J and for geo stuff QGIS, Mapbox.js and D3.js. Some code and data are available on my Github (and some are on Gitlab).
-
-# Cherry picked: Data journalism posts @TheEconomist:
-
+# Previous work includes:
+- [Nikkei Asian Review: China resorting less often to protectionism](https://asia.nikkei.com/Features/Datawatch/China-resorting-less-often-to-protectionism)
+- [China's airports losing battle with delays](https://asia.nikkei.com/Business/Trends/China-s-airports-losing-battle-with-delays)
+- [FT work](https://www.ft.com/search?q=ben+heubl)
 - [Germany refugee index](http://www.economist.com/blogs/graphicdetail/2016/04/daily-chart-8)
 - [Broadway prediction model](http://www.economist.com/blogs/graphicdetail/2016/07/daily-chart-18)
 - [US convention - sentiment analysis](http://www.economist.com/blogs/graphicdetail/2016/07/daily-chart-19)
 - [Where does foreign aid go?](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-8)
 - [Olympic events past, present and pretend](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-15)
-- [The evolution of Islamic State](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-10)
 - [Contribution to the Economist radio show (minute 23:20)](https://soundcloud.com/theeconomist/the-economist-asks-why-does-donald-trump-want-to-be-president)
 - [Facial recognition Economist post on presidential debates](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-12)
 - [How guns get into film](http://www.economist.com/blogs/prospero/2016/10/bang-your-buck)
 - [Semantic text analysis](http://www.economist.com/blogs/graphicdetail/2016/10/daily-chart-5)
-- [Test-tube miracles](http://www.economist.com/blogs/graphicdetail/2016/08/daily-chart-25)
-
-Last year, I started the blog [DataCandy.co.uk](http://datacandy.co.uk/). A short portfolio of interactive graphics and stories can be found [here:](http://datacandy.co.uk/design_portfolio/main/index.html) and some of my data journalism freelance work in the area of healthcare and technology can be found [here](http://innovatemedtec.com/content/series/DataVision). Previously, I wrote articles for WIRED, Forbes and TechCrunch.
