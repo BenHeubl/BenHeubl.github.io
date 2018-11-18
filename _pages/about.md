@@ -19,7 +19,7 @@ modified: 2016-04-18T20:39:37.000Z
 
 ![alt text](/images/about.png)
 
-I am a nerd and work for the FT. All ideas and thoughts shared on this blog are my own.
+I am a data journalist. All ideas and thoughts shared on this blog are my own.
 
 # Previous work includes:
 - [China resorting less often to protectionism](https://asia.nikkei.com/Features/Datawatch/China-resorting-less-often-to-protectionism)
