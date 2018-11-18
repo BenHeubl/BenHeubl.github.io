@@ -64,7 +64,7 @@ feature_row4:
     btn_class: btn--inverse
 ---
 
-I am a nerd and work for the FT. All ideas and thoughts shared are my own.
+I am a data journalist.
 
 # Previous work includes:
 - [Nikkei Asian Review: China resorting less often to protectionism](https://asia.nikkei.com/Features/Datawatch/China-resorting-less-often-to-protectionism)
